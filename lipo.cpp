@@ -8,13 +8,15 @@
 Lipo::Lipo(int low, int high, uint8_t analog_pin, int analog_read_max_voltage):
         m_low(low), m_high(high), m_analog_pin(analog_pin), m_max_voltage(analog_read_max_voltage)
 {
-    COTOMETR_LOG_ADD_DEBUG("Lipo inited");
+    COTOMETR_LOG_ADD_DEBUG("Lipo inited: low = " + String(low) + " High = " + String(high)
+                           + " pin = " + String(analog_pin) + " max pin voltage = " + String(m_max_voltage));
 }
 
 Lipo::LEVEL Lipo::get_level() {
     COTOMETR_LOG_CLEAR();
 
     int digital_val = analogRead(m_analog_pin);
+    COTOMETR_LOG_ADD_DEBUG("Read voltage = " + String(digital_val));
 
     long digital_min = map(m_low, 0, m_max_voltage, 0, 1023);
     long digital_max = map(m_high, 0, m_max_voltage, 0, 1023);
