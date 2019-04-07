@@ -6,7 +6,7 @@ class Lipo
 {
 public:
     /**
-     * @param low voltage level for the discharged battery in milivolt
+     * @param low voltage level for the discharged battery in 1Volt * 100
      * @param high voltage level for the charged battery
      * @param analog_pin the pin for reading the voltage level
      * @param analog_read_max_voltage the max milivoltage input of the analog pin
