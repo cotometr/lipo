@@ -32,7 +32,7 @@ public:
 private:
     COTOMETR_LOG_CREATE_DEBUG();
 
-    int analogRead();
+    float analogRead();
 
     uint8_t m_analog_pin;
     int m_low;

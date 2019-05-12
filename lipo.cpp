@@ -28,11 +28,11 @@ Lipo::LEVEL Lipo::get_level() {
 float Lipo::get_voltage() {
     COTOMETR_LOG_CLEAR();
 
-    int digital_val = analogRead();
+    float digital_val = analogRead();
 
-    float voltage = digital_val * 3.3f / 512;
+    float voltage = digital_val * 3.3f / 512.0f;
 
-    return voltage * 1.075f;
+    return voltage;
 }
 
 int compare(const void* a, const void* b)
@@ -48,29 +48,18 @@ int compare(const void* a, const void* b)
     return 0;
 }
 
-int Lipo::analogRead() {
+float Lipo::analogRead() {
     int max = 0;
-
-    constexpr int iter_count = 50;
-
-//    int values[iter_count];
+    constexpr int iter_count = 30;
 
     for (int i = 0; i < iter_count; i++) {
-        //sum += ::analogRead(m_analog_pin);
-//        values[i] = ::analogRead(m_analog_pin);
-        int curr_val = ::analogRead(m_analog_pin);
-        if (max < curr_val)
-            max = curr_val;
+        int curr = ::analogRead(m_analog_pin);
+        if (curr > max) {
+            max = curr;
+        }
 
-        delay(30);
+        delay(50);
     }
 
-//    qsort(values, iter_count, sizeof(int), compare);
-//
-//    for (int i = 0; i < iter_count / 28; i++) {
-//        sum += values[i];
-//    }
-
-//    return sum / (iter_count / 28);
     return max;
 }
