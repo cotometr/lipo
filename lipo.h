@@ -22,9 +22,17 @@ public:
 
     LEVEL get_level();
 
+    /**
+     * @brief Read the voltage value
+     * @return the battery level in volts
+     */
+    float get_voltage();
+
     COTOMETR_LOG_GET_DEBUG();
 private:
     COTOMETR_LOG_CREATE_DEBUG();
+
+    int analogRead();
 
     uint8_t m_analog_pin;
     int m_low;
